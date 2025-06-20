@@ -1,6 +1,6 @@
 TARGET = sleuth_driver.sys
 SRC_DIR = ..\driver
-OBJ_DIR = ..\driver\obj
+OBJ_DIR = ..\obj
 
 WDK_INCLUDE_KM     = C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\km
 WDK_INCLUDE_SHARED = C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared

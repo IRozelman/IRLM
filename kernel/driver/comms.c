@@ -1,7 +1,7 @@
-#include <ntifs.h>                         // Core NT kernel definitions
-#include <ntddk.h>                         // Driver utilities (IOCTLs, device defs)
-#include "../include/comms_shared.h"      // Our shared syscall event struct
-#include "../include/sleuth_defs.h"       // Logging macros, tag, etc.
+#include <ntifs.h>
+#include <ntddk.h>
+#include "../include/comms_shared.h"
+#include "../include/sleuth_defs.h"
 
 //
 // External event buffer & count from syscall_hooks.c
@@ -30,17 +30,17 @@ NTSTATUS HandleIoctl(IN PIRP Irp, IN PIO_STACK_LOCATION stack);
 //
 // Initialize the comms device — called in DriverEntry
 //
-NTSTATUS InitCommsDevice() {
+NTSTATUS InitCommsDevice(PDRIVER_OBJECT DriverObject) {
     NTSTATUS status;
 
     status = IoCreateDevice(
-        IoGetCurrentDriver(),     // Driver owner of this device
-        0,                        // Device extension size (we don't use it)
-        &g_DeviceName,           // \Device\SleuthComms
-        FILE_DEVICE_UNKNOWN,     // Just a generic device (not disk/etc)
-        0,                        // No flags
-        FALSE,                    // Not exclusive
-        &g_DeviceObject           // Output: created device obj
+        DriverObject,            // Pass the driver object from DriverEntry
+        0,
+        &g_DeviceName,
+        FILE_DEVICE_UNKNOWN,
+        0,
+        FALSE,
+        &g_DeviceObject
     );
 
     if (!NT_SUCCESS(status)) {

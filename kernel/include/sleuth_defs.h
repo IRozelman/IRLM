@@ -1,7 +1,6 @@
-#ifndef SLEUTH_DEFS_H
-#define SLEUTH_DEFS_H
+#pragma once
 
-#include <ntifs.h>  // Core NT kernel headers
+#include <ntddk.h>
 
 //
 // Memory allocation tag (used for tagging driver allocations)
@@ -36,4 +35,9 @@
     #define LOG(level, fmt, ...)
 #endif
 
-#endif
+NTSTATUS InitCommsDevice(PDRIVER_OBJECT DriverObject);
+VOID CleanupCommsDevice();
+NTSTATUS InstallSyscallHooks();
+VOID RemoveSyscallHooks();
+NTSTATUS InstallRegistryHooks();
+NTSTATUS CommsDispatch(IN PDEVICE_OBJECT DeviceObject, IN PIRP Irp);

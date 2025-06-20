@@ -1,0 +1,140 @@
+IRLM/
+│
+├── .vscode/
+│   ├── launch.json
+│   ├── settings.json
+│   └── tasks.json
+│
+├── README.md
+├── requirements.txt
+├── sleuth.sln
+│
+├── docs/
+│   ├── ARCHITECTURE.md
+│   ├── MODULE_DESIGN.md
+│   ├── THREAT_MODEL.md
+│   ├── PROTOCOL.md
+│   └── DEV_SETUP.md
+│
+├── kernel/
+│   ├── include/
+│   │   ├── syscall_hooks.h
+│   │   ├── comms_shared.h
+│   │   ├── sleuth_defs.h
+│   │   ├── registry_monitor.h
+│   │   ├── process_monitor.h
+│   │   ├── file_monitor.h
+│   │   └── network_monitor.h
+│   ├── driver/
+│   │   ├── sleuth_driver.c
+│   │   ├── syscall_hooks.c
+│   │   ├── comms.c
+│   │   ├── registry_monitor.c
+│   │   ├── process_monitor.c
+│   │   ├── file_monitor.c
+│   │   ├── network_monitor.c
+│   │   ├── filter_callbacks.c
+│   │   └── sleuth.inf
+│   ├── build/
+│   │   ├── Makefile
+│   │   └── sleuth.sln
+│   └── tests/
+│       ├── test_driver_load.c
+│       ├── test_hooks.c
+│       ├── test_registry.c
+│       ├── test_process.c
+│       ├── test_file.c
+│       └── test_network.c
+│
+├── core/
+│   ├── include/
+│   │   ├── process_map.h
+│   │   ├── syscall_mapper.h
+│   │   └── behavior_scoring.h
+│   ├── src/
+│   │   ├── main.cpp
+│   │   ├── collector.cpp
+│   │   ├── correlator.cpp
+│   │   ├── comms_bridge.cpp
+│   │   ├── scoring_engine.cpp
+│   │   └── logger.cpp
+│   ├── db/
+│   │   ├── behavior_db.json
+│   │   ├── matcher.cpp
+│   │   └── profile_compiler.cpp
+│   └── tests/
+│       ├── unit/
+│       └── integration/
+│
+├── detection/
+│   ├── behavior_analyzer.py
+│   ├── learning_engine.py
+│   ├── feature_extractor.py
+│   ├── utils.py
+│   └── profiles/
+│       └── default_profiles.json
+│
+├── agent/
+│   ├── python/
+│   │   ├── sleuth_agent/
+│   │   │   ├── monitor.py
+│   │   │   ├── injector.py
+│   │   │   ├── hooks/
+│   │   │   │   ├── os_hook.py
+│   │   │   │   └── net_hook.py
+│   │   │   └── utils.py
+│   │   └── tests/
+│   │       └── test_hooks.py
+│   ├── dotnet/
+│   │   ├── SleuthDotnetAgent/
+│   │   │   ├── Profiler.cs
+│   │   │   ├── Injector.cs
+│   │   │   └── Hooks/
+│   │   │       └── SystemNetHook.cs
+│   ├── c_cpp/
+│   │   ├── SleuthCInjector/
+│   │   │   ├── injector.c
+│   │   │   └── hook_api.c
+│   │   └── include/
+│   │       └── hook_api.h
+│
+├── interfaces/
+│   ├── cli/
+│   │   ├── sleuth.py
+│   │   └── commands/
+│   │       ├── monitor.py
+│   │       ├── analyze.py
+│   │       └── report.py
+│   └── desktop/
+│       ├── main.js
+│       └── renderer/
+│           ├── App.vue
+│           └── index.html
+│
+├── proto/
+│   ├── sleuth.proto
+│   ├── generated/
+│   │   ├── cpp/
+│   │   ├── python/
+│   │   └── dotnet/
+│
+├── tools/
+│   ├── profile_visualizer/
+│   │   ├── main.py
+│   │   └── visualizer.py
+│   ├── simulator/
+│   │   ├── attack_sim.py
+│   │   └── scenarios/
+│   │       ├── dll_injection.json
+│   │       └── file_theft.json
+│   └── debugger/
+│       └── sleuth_dbg.py
+│
+├── tests/
+│   ├── regression/
+│   └── system/
+│
+├── scripts/
+│   ├── build_all.ps1
+│   ├── install_driver.ps1
+│   └── run_tests.ps1

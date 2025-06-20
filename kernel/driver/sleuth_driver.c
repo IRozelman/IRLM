@@ -1,7 +1,7 @@
 #include <ntifs.h>
-#include "../include/syscall_hooks.h"
-#include "../include/sleuth_defs.h"
+#include <ntddk.h>
 #include "../include/comms_shared.h"
+#include "../include/sleuth_defs.h"
 
 //
 // Driver Unload Routine
@@ -28,7 +28,7 @@ NTSTATUS DriverEntry(PDRIVER_OBJECT DriverObject, PUNICODE_STRING RegistryPath)
     DriverObject->DriverUnload = DriverUnload;
 
     // Initialize communication device first
-    NTSTATUS status = InitCommsDevice();
+    NTSTATUS status = InitCommsDevice(DriverObject);
     if (!NT_SUCCESS(status)) {
         LOG(LOG_ERROR, "Failed to initialize communication device.");
         return status;
@@ -44,6 +44,13 @@ NTSTATUS DriverEntry(PDRIVER_OBJECT DriverObject, PUNICODE_STRING RegistryPath)
         CleanupCommsDevice(); 
         return status;
     }
+
+    status = InstallRegistryHooks();
+    if (!NT_SUCCESS(status)) {
+        LOG(LOG_ERROR, "Failed to install registry hooks.");
+        return status;
+    }
+
 
     LOG(LOG_INFO, "Syscall hooks installed successfully.");
     return STATUS_SUCCESS;

@@ -1,0 +1,181 @@
+SysSleuth/
+├── .vscode/
+│   ├── launch.json
+│   ├── settings.json
+│   └── tasks.json
+│
+├── README.md
+├── requirements.txt
+├── sleuth.sln
+│
+├── docs/
+│   ├── ARCHITECTURE.md
+│   ├── MODULE_DESIGN.md
+│   ├── THREAT_MODEL.md
+│   ├── PROTOCOL.md
+│   └── DEV_SETUP.md
+│
+├── lsm/
+│   ├── ebpf_monitor/
+│   │   ├── tracepoints/
+│   │   │   ├── file_trace.bpf.c
+│   │   │   ├── net_trace.bpf.c
+│   │   │   ├── proc_trace.bpf.c
+│   │   │   ├── registry_trace.bpf.c
+│   │   │   ├── bpfmap_guard.bpf.c
+│   │   │   ├── seccomp_trap_detect.bpf.c
+│   │   │   └── memfd_exec_detect.bpf.c
+│   │   ├── maps/
+│   │   │   ├── syscall_events.bpf.h
+│   │   │   ├── proc_activity_map.bpf.h
+│   │   │   └── rule_policies.bpf.h
+│   │   └── control/
+│   │       ├── blocklist_map.bpf.c
+│   │       ├── allowlist_map.bpf.c
+│   │       └── policy_decision.bpf.c
+│   └── lsm_hooks/
+│       ├── bpf_lsm_interface.c
+│       ├── hardening_rules.c
+│       └── override_hooks.c
+│
+├── kernel_integrity/
+│   ├── monitor_task_struct.c
+│   ├── detect_dkom.c
+│   └── hash_verifier.c
+│
+├── runtime_hardening/
+│   ├── memfd_guard/
+│   │   └── detect_memfd_exec.c
+│   ├── lib_preload_guard/
+│   │   └── detect_ld_preload.py
+│   ├── anti_ptrace/
+│   │   └── ptrace_detector.c
+│   ├── seccomp_guard/
+│   │   └── seccomp_profile_analyzer.py
+│   ├── bpf_integrity_monitor/
+│   │   └── detect_bpf_map_tampering.c
+│   ├── bpf_signature_check/
+│   │   └── verify_bpf_programs.py
+│   ├── runtime_introspection/
+│   │   └── syscall_entropy_profiler.py
+│
+├── boot_watchdog/
+│   ├── crontab_monitor.py
+│   ├── systemd_hooks.py
+│   └── rcfile_watcher.py
+│
+├── hypervisor_guard/
+│   ├── vm_detection.c
+│   ├── timing_anomalies.py
+│   └── smbios_scanner.c
+│
+├── firmware_guard/
+│   ├── microcode_diff.py
+│   └── secureboot_status_checker.c
+│
+├── network_guard/
+│   ├── xdp_monitor.c
+│   ├── iptables_hardener.py
+│   └── hidden_route_detector.py
+│
+├── core/
+│   ├── include/
+│   │   ├── process_map.h
+│   │   ├── syscall_mapper.h
+│   │   └── behavior_scoring.h
+│   ├── src/
+│   │   ├── main.cpp
+│   │   ├── collector.cpp
+│   │   ├── correlator.cpp
+│   │   ├── comms_bridge.cpp
+│   │   ├── scoring_engine.cpp
+│   │   └── logger.cpp
+│   ├── db/
+│   │   ├── behavior_db.json
+│   │   ├── matcher.cpp
+│   │   └── profile_compiler.cpp
+│   └── tests/
+│       ├── unit/
+│       └── integration/
+│
+├── detection/
+│   ├── behavior_analyzer.py
+│   ├── learning_engine.py
+│   ├── feature_extractor.py
+│   ├── utils.py
+│   └── profiles/
+│       └── default_profiles.json
+│
+├── agent/
+│   ├── python/
+│   │   ├── sleuth_agent/
+│   │   │   ├── monitor.py
+│   │   │   ├── injector.py
+│   │   │   ├── hooks/
+│   │   │   │   ├── os_hook.py
+│   │   │   │   └── net_hook.py
+│   │   │   └── utils.py
+│   │   └── tests/
+│   │       └── test_hooks.py
+│   ├── dotnet/
+│   │   ├── SleuthDotnetAgent/
+│   │   │   ├── Profiler.cs
+│   │   │   ├── Injector.cs
+│   │   │   └── Hooks/
+│   │   │       └── SystemNetHook.cs
+│   ├── c_cpp/
+│   │   ├── SleuthCInjector/
+│   │   │   ├── injector.c
+│   │   │   └── hook_api.c
+│   │   └── include/
+│   │       └── hook_api.h
+│   ├── bash/
+│   │   └── shell_wrapper.sh
+│   ├── php/
+│   │   └── wrapper.php
+│   ├── java/
+│   │   └── sleuth-java-agent.jar
+│   └── javascript/
+│       └── sleuth-agent.js
+│
+├── interfaces/
+│   ├── cli/
+│   │   ├── sleuth.py
+│   │   └── commands/
+│   │       ├── monitor.py
+│   │       ├── analyze.py
+│   │       └── report.py
+│   └── desktop/
+│       ├── main.js
+│       └── renderer/
+│           ├── App.vue
+│           └── index.html
+│
+├── proto/
+│   ├── sleuth.proto
+│   ├── generated/
+│   │   ├── cpp/
+│   │   ├── python/
+│   │   └── dotnet/
+│
+├── tools/
+│   ├── profile_visualizer/
+│   │   ├── main.py
+│   │   └── visualizer.py
+│   ├── simulator/
+│   │   ├── attack_sim.py
+│   │   └── scenarios/
+│   │       ├── dll_injection.json
+│   │       └── file_theft.json
+│   └── debugger/
+│       └── sleuth_dbg.py
+│
+├── tests/
+│   ├── regression/
+│   └── system/
+│
+├── scripts/
+│   ├── build_all.sh
+│   ├── install_monitor.sh
+│   └── run_tests.sh
+

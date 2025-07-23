@@ -10,11 +10,11 @@
 
 // Enum for syscall categories
 enum syscall_category {
-    CATEGORY_FILE = 1,
-    CATEGORY_NETWORK,
-    CATEGORY_PROCESS,
-    CATEGORY_REGISTRY,
-    CATEGORY_MEMFD
+    CATEGORY_FILE = 0,
+    CATEGORY_NETWORK = 1,
+    CATEGORY_PROCESS = 2,
+    CATEGORY_CONFIG = 3,
+    CATEGORY_MEMFD = 4
 };
 
 // Structure to log syscall events

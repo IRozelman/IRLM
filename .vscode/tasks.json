@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build BPF Program",
+      "type": "shell",
+      "command": "clang",
+      "args": [
+        "-O2",
+        "-g",
+        "-target", "bpf",
+        "-D__TARGET_ARCH_x86",
+        "-Wall",
+        "-Wno-unused-value",
+        "-Wno-pointer-sign",
+        "-Wno-compare-distinct-pointer-types",
+        "-I./lsm/ebpf_monitor/maps",
+        "-I./vmlinux",
+        "-c",
+        "${file}",
+        "-o",
+        "${fileDirname}/${fileBasenameNoExtension}.o"
+      ],
+      "group": "build",
+      "problemMatcher": [],
+      "detail": "Compiles a single BPF program file using Clang"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "C_Cpp.default.includePath": [
+    "/usr/include",
+    "/usr/include/bpf",
+    "/usr/include/x86_64-linux-gnu",
+    "/usr/lib/llvm-14/include",
+    "/lib/modules/$(uname -r)/build/include",
+    "${workspaceFolder}/lsm/ebpf_monitor/maps",
+    "${workspaceFolder}/vmlinux"
+  ],
+  "C_Cpp.default.defines": [
+    "__TARGET_ARCH_x86"
+  ],
+  "files.associations": {
+    "*.bpf.c": "c",
+    "*.bpf.h": "c",
+    "vmlinux.h": "c"
+  }
+}

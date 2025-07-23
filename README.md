@@ -13,20 +13,20 @@ IRLM is a Linux-based security system that uses eBPF and BPF-LSM to detect, trac
 
 ## Project Structure
 
-IRLM/
-├── lsm/ -> eBPF and LSM modules
-├── runtime_hardening/ -> Runtime protection modules
-├── kernel_integrity/ -> Kernel structure integrity checks
-├── network_guard/ -> Network-level protection (XDP, firewall)
-├── core/ -> C++ engine for scoring and correlation
-├── detection/ -> Python-based detection logic
-├── agent/ -> Agents in Python, C#, JS, and others
-├── interfaces/ -> CLI and GUI interfaces
-├── proto/ -> gRPC definitions
-├── tools/ -> Simulation and visualization tools
-├── tests/ -> Testing infrastructure
-├── scripts/ -> Install scripts, launchers
-└── docs/ -> Documentation
+IRLM/ \n
+├── lsm/ -> eBPF and LSM modules \n
+├── runtime_hardening/ -> Runtime protection modules \n
+├── kernel_integrity/ -> Kernel structure integrity checks \n
+├── network_guard/ -> Network-level protection (XDP, firewall) \n
+├── core/ -> C++ engine for scoring and correlation \n
+├── detection/ -> Python-based detection logic \n
+├── agent/ -> Agents in Python, C#, JS, and others \n
+├── interfaces/ -> CLI and GUI interfaces \n
+├── proto/ -> gRPC definitions \n
+├── tools/ -> Simulation and visualization tools \n
+├── tests/ -> Testing infrastructure \n
+├── scripts/ -> Install scripts, launchers \n
+└── docs/ -> Documentation \n
 
 ## Setup Instructions
 

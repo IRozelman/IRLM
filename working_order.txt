@@ -1,0 +1,90 @@
+== STAGE 0: PROJECT BOOTSTRAP ==
+[v] 0.1 Initialize Git repository and create IRLM/ base structure
+[v] 0.2 Set up Python virtual environment and install deps (bpftool, libbpf, etc.)
+[v] 0.3 Configure .vscode/ tasks and launch configs for BPF compilation
+[v] 0.4 Create and populate README.md and DEV_SETUP.md
+
+== STAGE 1: FILE AND NETWORK TRACING ==
+[v] 1.1 Create file_trace.bpf.c to trace open/openat/write/unlink/etc.
+[v] 1.2 Create syscall_events.bpf.h shared event structure and ring buffer
+[ ] 1.3 Create userland bridge
+[v] 1.4 Create net_trace.bpf.c to trace socket(), connect(), sendto(), etc.
+[ ] 1.5 TEST: Project builds cleanly with minimal placeholder .bpf.c files
+[ ] 1.6 TEST: File and net tracepoints correctly output events to ring buffer
+
+== STAGE 2: PROCESS AND CONFIG TRACING ==
+[v] 2.1 Create proc_trace.bpf.c to trace execve(), clone(), fork(), vfork()
+[ ] 2.2 Create proc_activity_map.bpf.h (PID tracking + correlation state)
+[v] 2.3 Create config_trace.bpf.c to monitor access to sensitive /etc files
+[ ] 2.4 Extend syscall_events.bpf.h with syscall enums and metadata
+[ ] 2.5 Create memfd_exec_detect.bpf.c to log memfd_create + fexecve
+[ ] 2.6 Create bpfmap_guard.bpf.c to trace access to suspicious BPF maps
+[ ] 2.7 Create seccomp_trap_detect.bpf.c to log unhandled seccomp filters
+[ ] 2.8 TEST: Process/memfd/seccomp traces show up in event buffer
+
+== STAGE 3: LSM POLICY HOOKS ==
+[ ] 3.1 Create bpf_lsm_interface.c (entry point for LSM enforcement)
+[ ] 3.2 Create blocklist_map.bpf.c and allowlist_map.bpf.c
+[ ] 3.3 Create policy_decision.bpf.c to interpret syscall decisions
+[ ] 3.4 Create override_hooks.c to intercept sensitive syscall perms
+[ ] 3.5 Create hardening_rules.c to implement deny + log logic
+[ ] 3.6 TEST: Blocklist enforcement blocks real syscalls by rule
+
+== STAGE 4: RUNTIME HARDENING MODULES ==
+[ ] 4.1 Create detect_memfd_exec.c in memfd_guard/ for post-fact correlation
+[ ] 4.2 Create detect_ld_preload.py to catch malicious preload env usage
+[ ] 4.3 Create ptrace_detector.c to catch suspicious ptrace calls
+[ ] 4.4 Create seccomp_profile_analyzer.py to validate seccomp config
+[ ] 4.5 Create detect_bpf_map_tampering.c for map integrity checks
+[ ] 4.6 Create verify_bpf_programs.py for ELF signature checks
+[ ] 4.7 Create syscall_entropy_profiler.py for syscall pattern entropy
+[ ] 4.8 TEST: Run full hardening modules on simulated malicious behavior
+
+== STAGE 5: KERNEL INTEGRITY MONITORING ==
+[ ] 5.1 Create monitor_task_struct.c to watch process flag tampering
+[ ] 5.2 Create detect_dkom.c to detect hidden/unlinked task_structs
+[ ] 5.3 Create hash_verifier.c to hash and verify syscall table + kernel text
+[ ] 5.4 TEST: Modify kernel structs and confirm detection is triggered
+
+== STAGE 6: BOOT-TIME INJECTION DETECTION ==
+[ ] 6.1 Create crontab_monitor.py to watch for hidden crontab entries
+[ ] 6.2 Create systemd_hooks.py to scan for suspicious systemd units
+[ ] 6.3 Create rcfile_watcher.py to track .bashrc, .profile injections
+[ ] 6.4 TEST: Inject fake script into boot chain and catch it
+
+== STAGE 7: HYPERVISOR AND VM DETECTION ==
+[ ] 7.1 Create vm_detection.c to check hypervisor presence flags
+[ ] 7.2 Create timing_anomalies.py for TSC vs real clock analysis
+[ ] 7.3 Create smbios_scanner.c to scan DMI for VM signatures
+[ ] 7.4 TEST: Run inside VM and confirm alerting
+
+== STAGE 8: FIRMWARE INTEGRITY CHECKS ==
+[ ] 8.1 Create microcode_diff.py to diff microcode versions from known baseline
+[ ] 8.2 Create secureboot_status_checker.c to verify UEFI/secureboot config
+[ ] 8.3 TEST: Test on machine with disabled secureboot and see detection
+
+== STAGE 9: NETWORK ANOMALY DETECTION ==
+[ ] 9.1 Create xdp_monitor.c to watch early packet activity (XDP level)
+[ ] 9.2 Create iptables_hardener.py to scan for weak firewall rules
+[ ] 9.3 Create hidden_route_detector.py to find hidden/default routes
+[ ] 9.4 TEST: Create rogue route + packet drop, confirm alert
+
+== STAGE 10: CORE BEHAVIOR ENGINE (C++) ==
+[ ] 10.1 Create core/include/process_map.h and syscall_mapper.h
+[ ] 10.2 Create core/src/collector.cpp for syscall ingestion from BPF ringbuf
+[ ] 10.3 Create core/src/correlator.cpp to build cross-syscall context trees
+[ ] 10.4 Create core/src/behavior_scoring.cpp for scoring suspicious chains
+[ ] 10.5 Create core/src/logger.cpp and comms_bridge.cpp
+[ ] 10.6 TEST: Simulate attack chain and verify correlation + scoring
+
+== STAGE 11: DETECTION ENGINE (PYTHON) ==
+[ ] 11.1 Create behavior_analyzer.py to tag bad behavior profiles
+[ ] 11.2 Create learning_engine.py to build dynamic baselines
+[ ] 11.3 Create feature_extractor.py for syscall/entropy/token features
+[ ] 11.4 TEST: Run learning engine on benign and malicious profiles
+
+== STAGE 12: INTEGRATION AND AGENT TESTING ==
+[ ] 12.1 Hook up python/net/c_cpp/bash/php/java/javascript agents
+[ ] 12.2 Run simulator/attack_sim.py with various scenarios
+[ ] 12.3 Run full system tests in tests/system/
+[ ] 12.4 TEST: End-to-end test of runtime threat → detection → report

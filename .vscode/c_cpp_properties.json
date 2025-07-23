@@ -3,12 +3,9 @@
     {
       "name": "IRLM BPF",
       "includePath": [
-        "/usr/include",
-        "/usr/include/x86_64-linux-gnu",
-        "/usr/lib/llvm-14/include",
-        "/lib/modules/$(uname -r)/build/include",
-        "${workspaceFolder}/lsm/ebpf_monitor/maps",
-        "${workspaceFolder}/vmlinux"
+      "${workspaceFolder}/**",
+      "/home/itamar/linux/tools/bpf/bpftool",
+      "lsm/ebpf_monitor/maps"
       ],
       "defines": [
         "__TARGET_ARCH_x86"

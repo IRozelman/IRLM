@@ -3,6 +3,8 @@
 
 #include <linux/limits.h>
 #include <bpf/bpf_helpers.h> // For BPF helpers
+#include <bpf/bpf_tracing.h>
+#include <bpf/bpf_core_read.h>
 
 #define MAX_SYSCALL_EVENTS 4096
 #define TASK_COMM_LEN 16
@@ -31,11 +33,12 @@ struct syscall_event_t {
 // eBPF ring buffer map for sending syscall events to user space
 struct {
     __uint(type, BPF_MAP_TYPE_RINGBUF);
-    __uint(max_entries, MAX_SYSCALL_EVENTS * sizeof(struct syscall_event_t));
+    __uint(max_entries, 1 << 24);  // 16MB ring buffer
 } syscall_events_map SEC(".maps");
 
+
 // Helper function to get parent process ID
-__always_inline u32 get_ppid(void) {
+__always_inline __u32 get_ppid(void) {
     struct task_struct *task = (struct task_struct *)bpf_get_current_task();
     if (!task) return 0;
 

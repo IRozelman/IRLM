@@ -7,10 +7,9 @@
 == STAGE 1: FILE AND NETWORK TRACING ==
 [v] 1.1 Create file_trace.bpf.c to trace open/openat/write/unlink/etc.
 [v] 1.2 Create syscall_events.bpf.h shared event structure and ring buffer
-[ ] 1.3 Create userland bridge
-[v] 1.4 Create net_trace.bpf.c to trace socket(), connect(), sendto(), etc.
-[ ] 1.5 TEST: Project builds cleanly with minimal placeholder .bpf.c files
-[ ] 1.6 TEST: File and net tracepoints correctly output events to ring buffer
+[v] 1.3 Create net_trace.bpf.c to trace socket(), connect(), sendto(), etc.
+[v] 1.4 TEST: Project builds cleanly with minimal placeholder .bpf.c files
+[ ] 1.5 TEST: File and net tracepoints correctly output events to ring buffer
 
 == STAGE 2: PROCESS AND CONFIG TRACING ==
 [v] 2.1 Create proc_trace.bpf.c to trace execve(), clone(), fork(), vfork()

@@ -8,11 +8,14 @@ char LICENSE[] SEC("license") = "Dual BSD/GPL";
 
 // Utility: check if path refers to a config directory or file
 static __always_inline int is_config_path(const char *filename) {
-    if (!filename) return 0;
-    if (__builtin_memcmp(filename, "/etc/", 5) == 0) return 1;
-    if (__builtin_memcmp(filename, "/usr/lib/systemd/", 17) == 0) return 1;
-    if (__builtin_memcmp(filename, "/var/lib/", 9) == 0) return 1;
-    if (__builtin_memcmp(filename, "/run/systemd/", 13) == 0) return 1;
+    char fname[256];
+    if (bpf_probe_read_user_str(fname, sizeof(fname), filename) > 0) {
+        if (!fname) return 0;
+        if (__builtin_memcmp(fname, "/etc/", 5) == 0) return 1;
+        if (__builtin_memcmp(fname, "/usr/lib/systemd/", 17) == 0) return 1;
+        if (__builtin_memcmp(fname, "/var/lib/", 9) == 0) return 1;
+        if (__builtin_memcmp(fname, "/run/systemd/", 13) == 0) return 1;
+    }
     return 0;
 }
 
